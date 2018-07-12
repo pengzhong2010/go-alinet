@@ -22,11 +22,12 @@ func GetIntranetIp() string {
 		if ipnet, ok := address.(*net.IPNet); ok && !ipnet.IP.IsLoopback() {
 			if ipnet.IP.To4() != nil {
 				//fmt.Println("ip:", ipnet.IP.String())
-				if !IsPublicIP(ipnet.IP) {
-					ipLocal = ipnet.IP.String()
+				if ipnet.IP.String() != "172.17.0.1" {
+					if !IsPublicIP(ipnet.IP) {
+						ipLocal = ipnet.IP.String()
+					}
 				}
 			}
-
 		}
 	}
 	return ipLocal
