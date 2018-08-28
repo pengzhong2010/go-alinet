@@ -9,12 +9,28 @@ import (
 //自动获取ip
 func GetIntranetIp() string {
 	ipLocal := ""
-	addrs, err := net.InterfaceAddrs()
 
+	//以太网网卡名称为eth0
+	inter, err := net.InterfaceByName("eth0")
 	if err != nil {
 		fmt.Println(err)
 		os.Exit(1)
 	}
+	addrs, err := inter.Addrs()
+	if err != nil {
+		fmt.Println(err)
+		os.Exit(1)
+	}
+	//ip地址一个ip4一个ip6
+	//for _, addr := range addrs {
+	//        fmt.Println(addr.String())
+	//}
+	//addrs, err := net.InterfaceAddrs()
+	//
+	//if err != nil {
+	//	fmt.Println(err)
+	//	os.Exit(1)
+	//}
 
 	for _, address := range addrs {
 
